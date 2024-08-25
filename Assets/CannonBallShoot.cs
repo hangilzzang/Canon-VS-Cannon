@@ -7,31 +7,38 @@ public class CannonBallShoot : MonoBehaviour
     public GameObject cannonballPrefab;
     Rigidbody2D rb;
     Vector2 forceDirection;
-    Vector2 launchPoint = new Vector2(-4, -3);
-    float forceAmount = 8f; // 발사할 힘의 크기
-    float degree = 45;
-    float newGravityScale = 0.05f;
+    Vector2 localLaunchPoint = new Vector2(1.5f, 1.5f); // 로컬 좌표계의 발사 지점
+    float forceAmount = 30f; // 발사할 힘의 크기
+    float localDegree = 45f; // 로컬 좌표계에서의 발사 각도
+    float newGravityScale = 0f;
+
     void Start()
     {
-        float angle = degree * Mathf.Deg2Rad; // 도를 라디안으로 변환
+        // 발사 각도를 라디안으로 변환하고 방향 벡터 계산
+        float angle = localDegree * Mathf.Deg2Rad;
         forceDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
     }
 
-    // Update is called once per frame
-    
     void Awake()
     {
-        Application.targetFrameRate = 60; // fps 60으로 설정
+        Application.targetFrameRate = 120; // fps 120으로 설정
     }
-    
+
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            GameObject cannonball = Instantiate(cannonballPrefab, launchPoint, Quaternion.identity);
+            // 로컬 좌표계의 발사 지점을 월드 좌표계로 변환
+            Vector2 worldLaunchPoint = transform.TransformPoint(localLaunchPoint);
+
+            // 발사 방향도 로컬 좌표계를 기준으로 회전
+            Vector2 worldForceDirection = transform.TransformDirection(forceDirection);
+
+            // 캐논볼 생성 및 발사
+            GameObject cannonball = Instantiate(cannonballPrefab, worldLaunchPoint, Quaternion.identity);
             rb = cannonball.GetComponent<Rigidbody2D>();
             rb.gravityScale = newGravityScale;
-            rb.AddForce(forceDirection * forceAmount, ForceMode2D.Impulse);
+            rb.AddForce(worldForceDirection * forceAmount, ForceMode2D.Impulse);
         }
     }
 }
