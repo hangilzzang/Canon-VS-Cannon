@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CannonBallShoot : MonoBehaviour
+public class PlayerShoot : MonoBehaviour
 {
     public GameObject cannonballPrefab;
     Rigidbody2D rb; // 대포알 리지드바디
     Vector2 forceDirection;
-    Vector2 LaunchPoint = new Vector2(-5f, -3f); // 로컬 좌표계의 발사 지점
+    Vector2 LaunchPoint = new Vector2(0f, -3f); // 로컬 좌표계의 발사 지점
     float forceAmount = 30f; // 발사할 힘의 크기
     float localDegree = 90f; // 로컬 좌표계에서의 발사 각도
-    float newGravityScale = 0f;
+    float newGravityScale = 1f;
 
     void Start()
     {
@@ -23,6 +23,7 @@ public class CannonBallShoot : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            
             // 로컬 좌표계의 발사 지점을 월드 좌표계로 변환
             // Vector2 worldLaunchPoint = transform.TransformPoint(localLaunchPoint);
 
