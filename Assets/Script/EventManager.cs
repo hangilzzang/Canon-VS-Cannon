@@ -1,18 +1,37 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EventManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static EventManager instance;
+    public event Action MouseDownEvent;
+    public event Action StateChangeEvent;
+
+
+    void Awake()
     {
-        
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetMouseButtonDown(0)) // 클릭입력 받으면
+        {
+            MouseDownEvent?.Invoke();
+        }
+    }
+
+    public void TriggerStateChanged()
+    {
+        StateChangeEvent?.Invoke();
     }
 }
