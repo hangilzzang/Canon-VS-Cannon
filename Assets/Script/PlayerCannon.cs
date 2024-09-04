@@ -9,7 +9,6 @@ public class PlayerCannon : MonoBehaviour
     public AudioSource bgm;
     public AudioSource cannonFrame;
     public AudioClip warBGM; 
-    public GameObject flag;
     Vector2 rotationPoint = new Vector2(-0.4994f, 0.0294f); // 로컬좌표
     float targetAngle = 80f; // 목표 회전각도
     float rotationSpeed = 31f; // 회전 속도
@@ -29,7 +28,7 @@ public class PlayerCannon : MonoBehaviour
     float cloudDistance = 1.3f;
     public  SpriteRenderer CannonCloud;
     float fadeInTime = 0.1f;
-    float fadeOutTime = 0.8f;
+    float fadeOutTime = 0.6f;
     // 대포 반동
     Vector2 originalPosition;
     Vector2 recoilPosition;
@@ -41,27 +40,36 @@ public class PlayerCannon : MonoBehaviour
     void Start()   // 이벤트 등록
     {   
         EventManager.instance.StateChangeEvent += GameReady_;
-        EventManager.instance.MouseDownEvent += FireCannonBall;
+        EventManager.instance.MouseDownEvent += FireCannonBall_;
     }
     void OnDisable() // 이벤트 해제
     {
         EventManager.instance.StateChangeEvent -= GameReady_;
-        EventManager.instance.MouseDownEvent -= FireCannonBall;
+        EventManager.instance.MouseDownEvent -= FireCannonBall_;
     }
 
 
-    void FireCannonBall()
+    void FireCannonBall_()
     {
         if (GameManager.instance.gameState == GameManager.GameState.Game)
         {
-            GameObject cannonball = Instantiate(cannonballPrefab, worldLaunchPoint, Quaternion.identity); // 프리팹 생성
-            cannonballRigidBody = cannonball.GetComponent<Rigidbody2D>();
-
-            cannonBody.Play();
-            cannonballRigidBody.AddForce(fireAngle * forceAmount, ForceMode2D.Impulse);
-            StartCoroutine(FireSmoke());
-            StartCoroutine(Recoil());
+            StartCoroutine(FireCannonBall());
         }
+    }
+    
+    
+    IEnumerator FireCannonBall()
+    {
+        GameManager.instance.gameState = GameManager.GameState.NoInput; // 상태변경
+        GameObject cannonball = Instantiate(cannonballPrefab, worldLaunchPoint, Quaternion.identity); // 프리팹 생성
+        cannonballRigidBody = cannonball.GetComponent<Rigidbody2D>();
+
+        cannonBody.Play();
+        cannonballRigidBody.AddForce(fireAngle * forceAmount, ForceMode2D.Impulse);
+        StartCoroutine(FireSmoke());
+        StartCoroutine(Recoil());
+        yield return new WaitForSeconds(1); 
+        GameManager.instance.gameState = GameManager.GameState.Game; // 상태변경
     }
 
     IEnumerator Recoil()
@@ -136,7 +144,6 @@ public class PlayerCannon : MonoBehaviour
             bgm.Pause();
             bgm.clip = warBGM;
             warHorn.Play(); // 전쟁 나팔 소리 재생
-            flag.SetActive(true); // 깃발 떨어짐
             yield return new WaitWhile(() => warHorn.isPlaying); // 소리 재생이 끝날 때까지 대기
             bgm.Play(); // 전쟁 bgm 재생
             cannonFrame.Play(); // 발사각도 조절 효과음
@@ -154,6 +161,7 @@ public class PlayerCannon : MonoBehaviour
             cannonCloud_.transform.rotation = transform.rotation;
             
             GameManager.instance.gameState = GameManager.GameState.Game; // 상태변경
+            EventManager.instance.TriggerStateChanged();
         }
     }
 

@@ -2,24 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EmemyAttack : MonoBehaviour
+public class EmemyAttackTest : MonoBehaviour
 {
     public GameObject cannonballPrefab;
     Rigidbody2D rb;
-    public Vector2 launchPoint = new Vector2(15,-3);
-    public float forceAmount = 13f;
-    public float fireAngle = 45f; // 왼쪽방향 기준
+    public Vector2 launchPoint = new Vector2(15,-3f);
+    public float forceAmount = 16f;
+    public float fireAngle = 50f; // 왼쪽방향 기준
 
-
-
-void Update()
-{
-    if (Input.GetMouseButtonDown(1))
+    void Update()
     {
-        LaunchEnemyCannonBall();
+        if (Input.GetMouseButtonDown(1))
+        {
+            LaunchEnemyCannonBall();
+        }
     }
-}
-
 
 
     void LaunchEnemyCannonBall()
