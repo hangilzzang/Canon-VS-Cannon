@@ -6,7 +6,7 @@ public class GameOver : MonoBehaviour
 {
     Vector3 targetPosition =  new Vector3(-9f, 0f, -10f);
     public GameObject enemyCannon;
-    float moveDuration = 0.2f; // 이동에 걸리는 시간
+    float moveDuration = 1f; // 이동에 걸리는 시간
     
     void Start()   // 이벤트 등록
     {   
@@ -19,9 +19,12 @@ public class GameOver : MonoBehaviour
 
     void GameOver_()
     {
+        // Time.timeScale = 0.0f;
+        StartCoroutine(MoveCameraToPosition());
+
+
         Time.timeScale = 0.2f;
         Time.fixedDeltaTime = 0.01f * Time.timeScale;
-        StartCoroutine(MoveCameraToPosition());
     }
     IEnumerator MoveCameraToPosition()
     {
