@@ -8,6 +8,7 @@ public class EventManager : MonoBehaviour
     public static EventManager instance;
     public event Action MouseDownEvent;
     public event Action StateChangeEvent;
+    public event Action GameOverEvent;
 
 
     void Awake()
@@ -33,5 +34,9 @@ public class EventManager : MonoBehaviour
     public void TriggerStateChanged()
     {
         StateChangeEvent?.Invoke();
+    }
+    public void TriggerGameOverEvent()
+    {
+        GameOverEvent?.Invoke();
     }
 }

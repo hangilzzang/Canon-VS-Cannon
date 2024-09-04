@@ -78,8 +78,8 @@ public class PlayerCannon : MonoBehaviour
         float time = 0f;
         while (time < recoilSpeed1)
         {
-            transform.position = Vector2.Lerp(originalPosition, recoilPosition, (time / recoilSpeed1));
             time += Time.deltaTime;
+            transform.position = Vector2.Lerp(originalPosition, recoilPosition, (time / recoilSpeed1));
             yield return null;
         }
         transform.position = recoilPosition;
@@ -88,8 +88,8 @@ public class PlayerCannon : MonoBehaviour
         time = 0f;
         while (time < recoilSpeed2)
         {
-            transform.position = Vector2.Lerp(recoilPosition, originalPosition, (time / recoilSpeed1));
             time += Time.deltaTime;
+            transform.position = Vector2.Lerp(recoilPosition, originalPosition, (time / recoilSpeed1));
             yield return null;
         }
         transform.position = originalPosition;

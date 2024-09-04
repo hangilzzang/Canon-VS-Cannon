@@ -145,17 +145,25 @@ public class EnemyAttack : MonoBehaviour
     void Start()   // 이벤트 등록
     {   
         EventManager.instance.StateChangeEvent += EnemyAttackStart;
+        EventManager.instance.GameOverEvent += EnemyAttackStop;
     }
     void OnDisable() // 이벤트 해제
     {
         EventManager.instance.StateChangeEvent -= EnemyAttackStart;
+        EventManager.instance.GameOverEvent -= EnemyAttackStop;
+    }
+
+
+    void EnemyAttackStop()
+    {
+        CancelInvoke("LaunchCannonball");
     }
 
     void EnemyAttackStart()
     {
         if (GameManager.instance.gameState == GameManager.GameState.Game)
         {
-            InvokeRepeating("LaunchCannonball", 1f, launchInterval);
+            InvokeRepeating("LaunchCannonball", 0.3f, launchInterval);
         }
     }
 

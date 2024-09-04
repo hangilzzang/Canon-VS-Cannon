@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class CannonBall : MonoBehaviour
 {
-    void OnTriggerEnter2D(Collider2D  other)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        Destroy(gameObject);
+        if (other.gameObject.tag == "OutOfBounds")
+        {
+            Destroy(gameObject);
+        }
+
+        else if (other.gameObject.tag == "GameOver")
+        {
+            EventManager.instance.TriggerGameOverEvent();
+        }
     }
 
         void Start()
     {
         // 3초 후에 자기 자신을 제거하는 코루틴을 시작합니다.
-        StartCoroutine(DestroyAfterTime(10.0f));
+        StartCoroutine(DestroyAfterTime(10f));
     }
 
     IEnumerator DestroyAfterTime(float delay)

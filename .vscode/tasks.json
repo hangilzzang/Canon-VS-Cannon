@@ -1,0 +1,16 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Commit with Timestamp",
+        "type": "shell",
+        "command": "git commit -m \"$(date +'%Y-%m-%d %H:%M:%S')\"",
+        "problemMatcher": [],
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        }
+      }
+    ]
+  }
+  
