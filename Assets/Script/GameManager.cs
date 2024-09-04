@@ -1,19 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance; 
     public enum GameState
     {
-        NoInput,
+        Reloading,
         Main,
         Ready,
         Game,
     }
 
     public GameState gameState;
+    public Text scoreText;
+    public int scoreValue = 0;
 
     void Awake() 
     {
@@ -33,5 +36,11 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         gameState = GameState.Main;
+    }
+
+    public void AddScore()
+    {
+       scoreValue += 1;
+       scoreText.text = scoreValue.ToString();
     }
 }

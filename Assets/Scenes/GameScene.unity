@@ -1607,6 +1607,7 @@ RectTransform:
   m_Children:
   - {fileID: 905163301}
   - {fileID: 1919743932}
+  - {fileID: 1610772747}
   - {fileID: 45820934}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8247,6 +8248,100 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1610772746
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1610772747}
+  - component: {fileID: 1610772750}
+  - component: {fileID: 1610772749}
+  - component: {fileID: 1610772748}
+  m_Layer: 5
+  m_Name: InGameScore
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1610772747
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610772746}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 289888285}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 85.10319, y: 226.94183}
+  m_Pivot: {x: 0.5, y: 1}
+--- !u!114 &1610772748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610772746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 2
+  m_VerticalFit: 2
+--- !u!114 &1610772749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610772746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 9eca4eaacaee6df4296cf6d8579871fa, type: 3}
+    m_FontSize: 150
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 1
+    m_MaxSize: 150
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 0
+--- !u!222 &1610772750
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610772746}
+  m_CullTransparentMesh: 1
 --- !u!1 &1634742765
 GameObject:
   m_ObjectHideFlags: 0
@@ -9284,7 +9379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b93406f0e5f2396428ba6ec259f279d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cannonballPrefab: {fileID: 3463176396451042803, guid: 2b357349d70e1c84ab1eeba82bb955ce, type: 3}
+  cannonballPrefab: {fileID: 3463176396451042803, guid: cba6d129835b4604ea3a91454cfffa35, type: 3}
   EmemyCannon: {fileID: 1891661446}
 --- !u!82 &1891661446
 AudioSource:
@@ -9409,7 +9504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 809cf2600f30835449c4db9a9014028a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cannonballPrefab: {fileID: 3463176396451042803, guid: 2b357349d70e1c84ab1eeba82bb955ce, type: 3}
+  cannonballPrefab: {fileID: 3463176396451042803, guid: cba6d129835b4604ea3a91454cfffa35, type: 3}
   launchPoint: {x: 15, y: -3}
   forceAmount: 16
   fireAngle: 50
@@ -9888,6 +9983,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3fe0e6e5a12cee4cb8859eead5ae844, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IngameScore: {fileID: 1610772746}
   warHorn: {fileID: 201479355}
   bgm: {fileID: 601541561}
   cannonFrame: {fileID: 1534125470}
@@ -10992,6 +11088,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameState: 0
+  scoreText: {fileID: 1610772749}
 --- !u!1 &2024727288
 GameObject:
   m_ObjectHideFlags: 0

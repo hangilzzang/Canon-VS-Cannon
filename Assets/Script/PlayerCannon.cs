@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerCannon : MonoBehaviour
 {
     // 게임 준비
+    public GameObject IngameScore;
     public AudioSource warHorn;
     public AudioSource bgm;
     public AudioSource cannonFrame;
@@ -60,7 +61,7 @@ public class PlayerCannon : MonoBehaviour
     
     IEnumerator FireCannonBall()
     {
-        GameManager.instance.gameState = GameManager.GameState.NoInput; // 상태변경
+        GameManager.instance.gameState = GameManager.GameState.Reloading; // 상태변경
         GameObject cannonball = Instantiate(cannonballPrefab, worldLaunchPoint, Quaternion.identity); // 프리팹 생성
         cannonballRigidBody = cannonball.GetComponent<Rigidbody2D>();
 
@@ -139,30 +140,27 @@ public class PlayerCannon : MonoBehaviour
     
     IEnumerator GameReady()
     {
-        if (GameManager.instance.gameState == GameManager.GameState.Ready)
-        {
-            bgm.Pause();
-            bgm.clip = warBGM;
-            warHorn.Play(); // 전쟁 나팔 소리 재생
-            yield return new WaitWhile(() => warHorn.isPlaying); // 소리 재생이 끝날 때까지 대기
-            bgm.Play(); // 전쟁 bgm 재생
-            cannonFrame.Play(); // 발사각도 조절 효과음
-            yield return StartCoroutine(RotateCannon()); // 대포 각도조절
-            cannonFrame.Pause();
-            
-            fireAngle = transform.right; // 발사각도 결정됨
-            worldLaunchPoint = transform.TransformPoint(launchPoint); // 발사위치 계산 
-            
-            originalPosition = transform.position; // 대포위치 계산
-            recoilPosition = originalPosition + (Vector2)(-transform.right * recoilDistance); // 반동 위치 계산
+        IngameScore.SetActive(true); // 스코어 UI
+        bgm.Pause();
+        bgm.clip = warBGM;
+        warHorn.Play(); // 전쟁 나팔 소리 재생
+        yield return new WaitWhile(() => warHorn.isPlaying); // 소리 재생이 끝날 때까지 대기
+        bgm.Play(); // 전쟁 bgm 재생
+        cannonFrame.Play(); // 발사각도 조절 효과음
+        yield return StartCoroutine(RotateCannon()); // 대포 각도조절
+        cannonFrame.Pause();
+        fireAngle = transform.right; // 발사각도 결정됨
+        worldLaunchPoint = transform.TransformPoint(launchPoint); // 발사위치 계산 
+        
+        originalPosition = transform.position; // 대포위치 계산
+        recoilPosition = originalPosition + (Vector2)(-transform.right * recoilDistance); // 반동 위치 계산
 
-            // 연기 배치
-            cannonCloud_.transform.position = transform.position + transform.right * cloudDistance;
-            cannonCloud_.transform.rotation = transform.rotation;
-            
-            GameManager.instance.gameState = GameManager.GameState.Game; // 상태변경
-            EventManager.instance.TriggerStateChanged();
-        }
+        // 연기 배치
+        cannonCloud_.transform.position = transform.position + transform.right * cloudDistance;
+        cannonCloud_.transform.rotation = transform.rotation;
+        
+        GameManager.instance.gameState = GameManager.GameState.Game; // 상태변경
+        EventManager.instance.TriggerStateChanged();
     }
 
     IEnumerator RotateCannon()

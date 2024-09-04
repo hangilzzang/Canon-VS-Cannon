@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2516873631689520891}
   - component: {fileID: 6885567010453023610}
   - component: {fileID: 4594472708900815207}
+  - component: {fileID: 1585795114616454553}
   m_Layer: 0
   m_Name: PlayerCannonBall
   m_TagString: Untagged
@@ -77,12 +78,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 4
-  m_Sprite: {fileID: 21300000, guid: d40a63069e0e3304daee70473130af9c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e17f2371d2d74fa46abff3e85f1bdeff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.8, y: 0.8}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -273,5 +274,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe7a6a576b9121d48b20a96a45dabc91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1585795114616454553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3463176396451042803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed987b7eb6360174e80837ca618dac11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
