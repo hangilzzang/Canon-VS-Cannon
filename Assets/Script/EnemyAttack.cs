@@ -169,32 +169,32 @@ public class EnemyAttack : MonoBehaviour
 
     void LaunchCannonball()
     {
-        // if (GameManager.instance.scoreValue < 10)
-        // {
-        //     selectedTrajectory = trajectories[Random.Range(0, 11)];
-        // }
-        // else if (GameManager.instance.scoreValue < 20)
-        // {
-        //     selectedTrajectory = trajectories[Random.Range(0, 32)];
-        // }
-        // else if (GameManager.instance.scoreValue < 30)
-        // {
-        //     selectedTrajectory = trajectories[Random.Range(0, 50)];
-        // }
-        // else if (GameManager.instance.scoreValue < 40)
-        // {
-        //     selectedTrajectory = trajectories[Random.Range(0, 72)];
-        // }
-        // else if (GameManager.instance.scoreValue < 50)
-        // {
-        //     selectedTrajectory = trajectories[Random.Range(0, 93)];
-        // }
-        // else
-        // {
-        //     selectedTrajectory = trajectories[Random.Range(0, trajectories.Count)];
-        // }
+        if (GameManager.instance.scoreValue < 10)
+        {
+            selectedTrajectory = trajectories[Random.Range(0, 11)];
+        }
+        else if (GameManager.instance.scoreValue < 20)
+        {
+            selectedTrajectory = trajectories[Random.Range(0, 32)];
+        }
+        else if (GameManager.instance.scoreValue < 30)
+        {
+            selectedTrajectory = trajectories[Random.Range(0, 50)];
+        }
+        else if (GameManager.instance.scoreValue < 40)
+        {
+            selectedTrajectory = trajectories[Random.Range(0, 72)];
+        }
+        else if (GameManager.instance.scoreValue < 50)
+        {
+            selectedTrajectory = trajectories[Random.Range(0, 93)];
+        }
+        else
+        {
+            selectedTrajectory = trajectories[Random.Range(0, trajectories.Count)];
+        }
         
-        selectedTrajectory = trajectories[Random.Range(0, trajectories.Count)];
+        // selectedTrajectory = trajectories[Random.Range(0, trajectories.Count)];
         // 각도를 라디안으로 변환
         float angle = (-(selectedTrajectory.degree - 90f) + 90f) * Mathf.Deg2Rad;
         Vector2 forceDirection = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));

@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
         Main,
         Ready,
         Game,
+        GameOver,
     }
 
     public GameState gameState;

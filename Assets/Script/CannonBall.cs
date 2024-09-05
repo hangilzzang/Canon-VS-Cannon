@@ -10,10 +10,13 @@ public class CannonBall : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        else if (other.gameObject.tag == "GameOver")
+    }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "GameOver" && (GameManager.instance.gameState == GameManager.GameState.Game || GameManager.instance.gameState == GameManager.GameState.Reloading))
         {
             EventManager.instance.TriggerGameOverEvent();
+            GameManager.instance.gameState = GameManager.GameState.GameOver;
         }
     }
 
