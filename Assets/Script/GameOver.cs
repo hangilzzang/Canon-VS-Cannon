@@ -26,7 +26,7 @@ public class GameOver : MonoBehaviour
         Color imageColor = image.color;
         image.color = new Color(imageColor.r, imageColor.g, imageColor.b, 0.83f); 
         // 작아지는 bgm
-        bgm.volume = 0.5f;
+        bgm.volume = 0.3f;
         // 부활 ui팝업
         reviveUI.SetActive(true);
         // 시간 느리게

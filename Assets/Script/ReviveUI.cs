@@ -8,9 +8,9 @@ public class ReviveUI : MonoBehaviour
     public Slider slider;
     float decreaseSpeed = 0.5f;
     public RectTransform adLogo;
-    float scaleTime1 = 1f;
-    float scaleTime2 = 1f;
-    Vector3 maxScale = new Vector3(1.1f, 1.1f, 1f);
+    float scaleTime1 = 0.3f;
+    float scaleTime2 = 0.4f;
+    Vector3 maxScale = new Vector3(1.2f, 1.2f, 1f);
     Vector3 minScale = new Vector3(1f, 1f, 1f);
 
     void Start()
@@ -26,7 +26,9 @@ public class ReviveUI : MonoBehaviour
             slider.value -= decreaseSpeed * Time.deltaTime;
             yield return null;
         }
-        // 씬 재시작
+
+        GameManager.instance.gameState = GameManager.GameState.NoRevive; // 상태변경
+        EventManager.instance.TriggerStateChanged();
     }
 
     IEnumerator ScaleUpAndDown()
@@ -49,7 +51,7 @@ public class ReviveUI : MonoBehaviour
         {
             // Lerp를 사용해 시간에 따라 스케일을 변화
             adLogo.localScale = Vector3.Lerp(fromScale, toScale, currentTime / duration);
-            currentTime += Time.deltaTime;
+            currentTime += Time.unscaledDeltaTime;
             yield return null;  // 프레임마다 대기
         }
         adLogo.localScale = toScale;
