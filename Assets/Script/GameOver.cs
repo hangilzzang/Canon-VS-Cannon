@@ -5,11 +5,11 @@ using UnityEngine.UI;
 public class GameOver : MonoBehaviour
 {
     Vector3 targetPosition =  new Vector3(-9f, 0f, -10f);
-    public GameObject enemyCannon;
     float moveDuration = 1f; // 이동에 걸리는 시간
-    public AudioSource bgm;
-    public Image image;
+
     public GameObject reviveUI;
+    bool canRevive = true;
+    public AudioSource rockBreak;
     
     void Start()   // 이벤트 등록
     {   
@@ -19,23 +19,24 @@ public class GameOver : MonoBehaviour
     {
         EventManager.instance.GameOverEvent -= GameOver_;
     }
-
     void GameOver_()
     {
-        // 어두운 게임 화면 적용
-        Color imageColor = image.color;
-        image.color = new Color(imageColor.r, imageColor.g, imageColor.b, 0.83f); 
-        // 작아지는 bgm
-        bgm.volume = 0.3f;
-        // 부활 ui팝업
-        reviveUI.SetActive(true);
-        // 시간 느리게
-        Time.timeScale = 0.2f;
-        Time.fixedDeltaTime = 0.01f * Time.timeScale;
+        GameManager.instance.gameState = GameManager.GameState.NoRevive; // 상태변경
+        rockBreak.Play();
         // 카메라 이동
-        StartCoroutine(MoveCameraToPosition());
+        StartCoroutine(MoveCameraToPosition(targetPosition, moveDuration));
+        
+        if (canRevive) // 부활 ui팝업
+        {       
+            reviveUI.SetActive(true);
+            canRevive = false;
+        }
+        else // 게임종료
+        {
+            EventManager.instance.TriggerStateChanged();
+        }
     }
-    IEnumerator MoveCameraToPosition()
+    IEnumerator MoveCameraToPosition(Vector3 targetPosition, float moveDuration)
     {
         Vector3 startPosition = transform.position;
         float elapsedTime = 0f; // 경과시간

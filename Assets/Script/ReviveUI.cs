@@ -6,15 +6,23 @@ using UnityEngine.UI;
 public class ReviveUI : MonoBehaviour
 {
     public Slider slider;
-    float decreaseSpeed = 0.5f;
+    float decreaseSpeed = 0.24f;
     public RectTransform adLogo;
     float scaleTime1 = 0.3f;
     float scaleTime2 = 0.4f;
     Vector3 maxScale = new Vector3(1.2f, 1.2f, 1f);
     Vector3 minScale = new Vector3(1f, 1f, 1f);
+    public Image image;
 
     void Start()
     {
+        // 타임스케일 설정
+        Time.timeScale = 0.2f;
+        Time.fixedDeltaTime = 0.01f * Time.timeScale;
+
+        Color imageColor = image.color;
+        image.color = new Color(imageColor.r, imageColor.g, imageColor.b, 0.83f); 
+
         StartCoroutine(DecreaseSlider());
         StartCoroutine(ScaleUpAndDown());
     }
@@ -23,7 +31,8 @@ public class ReviveUI : MonoBehaviour
     {
         while (slider.value > 0)
         {
-            slider.value -= decreaseSpeed * Time.deltaTime;
+            // Time.unscaledDeltaTime을 사용해 타임스케일의 영향을 받지 않도록 설정
+            slider.value -= decreaseSpeed * Time.unscaledDeltaTime;
             yield return null;
         }
 
@@ -49,14 +58,12 @@ public class ReviveUI : MonoBehaviour
 
         while (currentTime < duration)
         {
-            // Lerp를 사용해 시간에 따라 스케일을 변화
+            // Lerp를 사용해 시간에 따라 스케일을 변화시키고, unscaledDeltaTime 사용
             adLogo.localScale = Vector3.Lerp(fromScale, toScale, currentTime / duration);
             currentTime += Time.unscaledDeltaTime;
             yield return null;  // 프레임마다 대기
         }
         adLogo.localScale = toScale;
     }
+
 }
-
-
-

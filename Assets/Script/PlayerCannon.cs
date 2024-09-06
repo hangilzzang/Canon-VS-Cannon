@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
+
 
 public class PlayerCannon : MonoBehaviour
 {
@@ -26,10 +28,15 @@ public class PlayerCannon : MonoBehaviour
     public AudioSource cannonBody;
     // 대포 연기
     public GameObject cannonCloud_;
-    float cloudDistance = 1.3f;
+    float cloudDistance = 1.13f;
     public  SpriteRenderer CannonCloud;
     float fadeInTime = 0.1f;
-    float fadeOutTime = 0.6f;
+    float fadeOutTime = 0.7f;
+    float cloudSclaeDuration = 0.8f;
+    Vector2 cloudFinalScale = new Vector2(1.2f, 1.2f);
+    Vector2 cloudOriginalPosition; 
+    Vector2 cloudTargetPosition = new Vector2(-5.2f, -1.61f);
+    
     // 대포 반동
     Vector2 originalPosition;
     Vector2 recoilPosition;
@@ -67,36 +74,32 @@ public class PlayerCannon : MonoBehaviour
 
         cannonBody.Play();
         cannonballRigidBody.AddForce(fireAngle * forceAmount, ForceMode2D.Impulse);
+        
         StartCoroutine(FireSmoke());
         StartCoroutine(Recoil());
-        yield return new WaitForSeconds(1); 
-        GameManager.instance.gameState = GameManager.GameState.Game; // 상태변경
+        cannonCloud_.transform.DOScale(cloudFinalScale, cloudSclaeDuration).SetEase(Ease.OutExpo);
+        cannonCloud_.transform.DOMove(cloudTargetPosition, cloudSclaeDuration).SetEase(Ease.OutExpo);
+        
+        yield return new WaitForSeconds(cloudSclaeDuration); 
+        
+        cannonCloud_.transform.position = cloudOriginalPosition;
+        cannonCloud_.transform.localScale = new Vector2(0.5f, 0.5f);
+
+        if (GameManager.instance.gameState == GameManager.GameState.Reloading)
+        { 
+            GameManager.instance.gameState = GameManager.GameState.Game; // 상태변경
+        }
     }
 
     IEnumerator Recoil()
     {
-        float time = 0f;
-        while (time < recoilSpeed1)
-        {
-            time += Time.deltaTime;
-            transform.position = Vector2.Lerp(originalPosition, recoilPosition, (time / recoilSpeed1));
-            yield return null;
-        }
-        transform.position = recoilPosition;
-        yield return null;
-
-        time = 0f;
-        while (time < recoilSpeed2)
-        {
-            time += Time.deltaTime;
-            transform.position = Vector2.Lerp(recoilPosition, originalPosition, (time / recoilSpeed1));
-            yield return null;
-        }
-        transform.position = originalPosition;
-        yield return null;
+        yield return StartCoroutine(GameManager.instance.Move(transform, recoilPosition, recoilSpeed1));
+        yield return StartCoroutine(GameManager.instance.Move(transform, originalPosition, recoilSpeed2));
     }
 
 
+
+    
 
 
 
@@ -156,7 +159,9 @@ public class PlayerCannon : MonoBehaviour
         recoilPosition = originalPosition + (Vector2)(-transform.right * recoilDistance); // 반동 위치 계산
 
         // 연기 배치
-        cannonCloud_.transform.position = transform.position + transform.right * cloudDistance;
+        
+        cloudOriginalPosition = transform.position + transform.right * cloudDistance;
+        cannonCloud_.transform.position = cloudOriginalPosition;
         cannonCloud_.transform.rotation = transform.rotation;
         
         GameManager.instance.gameState = GameManager.GameState.Game; // 상태변경
