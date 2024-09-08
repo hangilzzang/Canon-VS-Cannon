@@ -23,6 +23,9 @@ public class GameOver : MonoBehaviour
     {
         GameManager.instance.gameState = GameManager.GameState.NoRevive; // 상태변경
         rockBreak.Play();
+
+        Handheld.Vibrate();
+        
         // 카메라 이동
         StartCoroutine(MoveCameraToPosition(targetPosition, moveDuration));
         

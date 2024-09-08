@@ -22,6 +22,10 @@ public class GameManager : MonoBehaviour
     public int scoreValue = 0;
     public Text bestScore;
 
+    int bestScoreValue;
+
+    public Text currentScore;
+
     void Awake() 
     {
         gameState = GameState.Main;
@@ -43,20 +47,28 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        int bestScoreValue = PlayerPrefs.GetInt("BestScore", 0);
-        bestScore.text = "Best: " + bestScoreValue.ToString();
+        bestScoreValue = PlayerPrefs.GetInt("BestScore", 0);
+        bestScoreValue = PlayerPrefs.GetInt("BestScore", 0);
+        bestScore.text = "Best score: " + bestScoreValue.ToString();
+        currentScore.text = currentScore.ToString();
+
     }
 
     public void UpdateBestScore()
     {
-        int bestScoreValue = PlayerPrefs.GetInt("BestScore", 0); // 저장된값없으면 0 반환
         if (scoreValue > bestScoreValue)
         {
             PlayerPrefs.SetInt("BestScore", scoreValue);
             PlayerPrefs.Save();
         }
     }
-    
+
+    public void UpdateCurrentScore()
+    {
+            PlayerPrefs.SetInt("ScoreValue", scoreValue);
+            PlayerPrefs.Save();
+    }
+
     // 위치 변경
     public IEnumerator Move<T>(T objTransform, Vector2 endPosition, float speed) where T : Component
     {

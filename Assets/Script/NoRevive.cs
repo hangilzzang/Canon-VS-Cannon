@@ -62,6 +62,9 @@ public class NoRevive : MonoBehaviour
         // 최고기록 업데이트
         GameManager.instance.UpdateBestScore();
 
+        // 현재 기록 업데이트 
+        GameManager.instance.UpdateCurrentScore();
+
         // 컬러 정상화
         Color imageColor = image.color;
         image.color = new Color(imageColor.r, imageColor.g, imageColor.b, 0f); 

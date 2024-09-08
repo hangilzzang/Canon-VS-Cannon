@@ -24,14 +24,6 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0)) // 클릭입력 받으면
-        {
-            MouseDownEvent?.Invoke();
-        }
-    }
-
     public void TriggerStateChanged()
     {
         StateChangeEvent?.Invoke();
@@ -43,5 +35,9 @@ public class EventManager : MonoBehaviour
     public void TriggerDestoryAllCannonBallEvent()
     {
         DestoryAllCannonBallEvent?.Invoke();
+    }
+    public void TriggerMouseDownEvent()
+    {
+        MouseDownEvent?.Invoke();
     }
 }
