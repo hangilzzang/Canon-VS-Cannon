@@ -25,8 +25,8 @@ public class NoRevive : MonoBehaviour
     public GameObject castle;
     public GameObject spareCastle;
     // 카메라
-    public Transform cameraTransform;
-    Vector3 targetPosition =  new Vector2(0f, 0f);
+    public GameOver gameOverScript;
+    Vector3 targetPosition =  new Vector3(0f, 0f, -10f);
     float cameraMoveDuration = 1f; // 이동에 걸리는 시간
 
 
@@ -59,6 +59,9 @@ public class NoRevive : MonoBehaviour
         // reviveUI 끄기
         reviveUI.SetActive(false);
 
+        // 최고기록 업데이트
+        GameManager.instance.UpdateBestScore();
+
         // 컬러 정상화
         Color imageColor = image.color;
         image.color = new Color(imageColor.r, imageColor.g, imageColor.b, 0f); 
@@ -87,6 +90,7 @@ public class NoRevive : MonoBehaviour
 
     public void AdIconClicked()
     {
+        StartCoroutine(AdClickCoroutine());
     }
 
     public IEnumerator AdClickCoroutine()
@@ -101,14 +105,15 @@ public class NoRevive : MonoBehaviour
         // 컬러 정상화
         Color imageColor = image.color;
         image.color = new Color(imageColor.r, imageColor.g, imageColor.b, 0f); 
-
+        EventManager.instance.TriggerDestoryAllCannonBallEvent(); // 대포알들 다 제거
+        
         castle.SetActive(false); // 잔해 치우기
         spareCastle.SetActive(true); // 성 리필
 
         yield return new WaitForSeconds(1f);  // 잠시대기 
 
         // 카메라 이동
-        StartCoroutine(GameManager.instance.Move(cameraTransform, targetPosition, cameraMoveDuration));
+        StartCoroutine(gameOverScript.MoveCameraToPosition(targetPosition, cameraMoveDuration));
         yield return new WaitForSeconds(1f);  // 잠시대기 
         
         

@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public GameState gameState;
     public Text scoreText;
     public int scoreValue = 0;
+    public Text bestScore;
 
     void Awake() 
     {
@@ -37,6 +38,22 @@ public class GameManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+    void Start()
+    {
+        int bestScoreValue = PlayerPrefs.GetInt("BestScore", 0);
+        bestScore.text = "Best: " + bestScoreValue.ToString();
+    }
+
+    public void UpdateBestScore()
+    {
+        int bestScoreValue = PlayerPrefs.GetInt("BestScore", 0); // 저장된값없으면 0 반환
+        if (scoreValue > bestScoreValue)
+        {
+            PlayerPrefs.SetInt("BestScore", scoreValue);
+            PlayerPrefs.Save();
         }
     }
     

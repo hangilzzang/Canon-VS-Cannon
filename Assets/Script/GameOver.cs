@@ -36,7 +36,7 @@ public class GameOver : MonoBehaviour
             EventManager.instance.TriggerStateChanged();
         }
     }
-    IEnumerator MoveCameraToPosition(Vector3 targetPosition, float moveDuration)
+    public IEnumerator MoveCameraToPosition(Vector3 targetPosition, float moveDuration)
     {
         Vector3 startPosition = transform.position;
         float elapsedTime = 0f; // 경과시간

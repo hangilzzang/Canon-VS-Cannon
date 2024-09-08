@@ -4,6 +4,22 @@ using UnityEngine;
 
 public class CannonBall : MonoBehaviour
 {
+    void OnEnable()
+    {
+        EventManager.instance.DestoryAllCannonBallEvent += DestoryMyself;  // 이벤트 등록
+    }
+
+    void OnDisable()
+    {
+        EventManager.instance.DestoryAllCannonBallEvent -= DestoryMyself;  // 이벤트 해지
+    }
+    
+    void DestoryMyself()
+    {
+        Destroy(gameObject);
+    }
+
+    
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "OutOfBounds")
