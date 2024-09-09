@@ -7,10 +7,26 @@ public class TextFadeLoop : MonoBehaviour
     public Text uiText;
     float fadeDuration = 0.4f; // 변환시간
     float stayDuration = 0.15f; // 상태를 유지 시간
-
+    bool started = false;
     private void Start()
     {
         StartCoroutine(FadeLoop());
+        started = true;
+    }
+
+    private void OnEnable()
+    {
+        // 게임 오브젝트가 활성화될 때 코루틴을 시작
+        if (started == true)
+        {
+            StartCoroutine(FadeLoop());
+        }
+    }
+
+    private void OnDisable()
+    {
+        // 게임 오브젝트가 비활성화될 때 코루틴을 중지
+        StopCoroutine(FadeLoop());
     }
 
     private IEnumerator FadeLoop()

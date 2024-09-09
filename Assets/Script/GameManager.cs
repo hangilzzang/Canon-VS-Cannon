@@ -51,9 +51,11 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        // PlayerPrefs.DeleteAll();
-        // PlayerPrefs.Save();
 
+        // PlayerPrefs.DeleteAll();
+        PlayerPrefs.SetInt("BestScore", 40);
+        PlayerPrefs.Save();
+        
         int lastScoreValue = PlayerPrefs.GetInt("ScoreValue", 0);
         int isNewRecord = PlayerPrefs.GetInt("NewRecord", 0);
 

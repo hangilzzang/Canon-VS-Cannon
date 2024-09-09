@@ -44,11 +44,27 @@ public class PlayerCannon : MonoBehaviour
     float recoilSpeed1 = 0.2f; 
     float recoilSpeed2 = 0.6f; 
 
+    // 대포 스킨
+    int selectedBall;
+
+    public Sprite cannonBall;
+    public Sprite bawlingBall;
+    public Sprite tennisBall;
+    public Sprite basketBall;
+    public Sprite baseBall;
+    public Sprite waterMelon;    
+
+    List<Sprite> ballSprites;
+    Sprite selectedSprite;
+
+
+
 
     void Start()   // 이벤트 등록
     {   
         EventManager.instance.StateChangeEvent += GameReady_;
         EventManager.instance.MouseDownEvent += FireCannonBall_;
+
     }
     void OnDisable() // 이벤트 해제
     {
@@ -69,7 +85,13 @@ public class PlayerCannon : MonoBehaviour
     IEnumerator FireCannonBall()
     {
         GameManager.instance.gameState = GameManager.GameState.Reloading; // 상태변경
+        
+        
         GameObject cannonball = Instantiate(cannonballPrefab, worldLaunchPoint, Quaternion.identity); // 프리팹 생성
+        
+        SpriteRenderer spriteRenderer = cannonball.GetComponent<SpriteRenderer>(); // 스프라이트 렌더러 불러오기
+        spriteRenderer.sprite = selectedSprite; // 스프라이트 교체
+        
         cannonballRigidBody = cannonball.GetComponent<Rigidbody2D>();
 
         cannonBody.Play();
@@ -143,6 +165,21 @@ public class PlayerCannon : MonoBehaviour
     
     IEnumerator GameReady()
     {
+
+        selectedBall = PlayerPrefs.GetInt("Selected", 0); // 가져옴
+
+        ballSprites = new List<Sprite>
+        {
+            cannonBall,
+            bawlingBall,
+            tennisBall,
+            basketBall,
+            baseBall,
+            waterMelon
+        };
+        selectedSprite = ballSprites[selectedBall]; // 사용할 볼 정함
+
+
         IngameScore.SetActive(true); // 스코어 UI
         bgm.Pause();
         bgm.clip = warBGM;

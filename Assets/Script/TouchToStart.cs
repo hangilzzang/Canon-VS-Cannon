@@ -4,9 +4,20 @@ using UnityEngine;
 
 public class TouchToStart : MonoBehaviour
 {
+    bool started = false;
     void Start()
     {
         EventManager.instance.MouseDownEvent += GameStart; // 이벤트 등록
+        started = true;
+    }
+
+    void OnEnable()
+    {
+        // 게임 오브젝트가 활성화될 때 코루틴을 시작
+        if (started == true)
+        {
+            EventManager.instance.MouseDownEvent += GameStart;
+        }
     }
 
     void OnDisable()
