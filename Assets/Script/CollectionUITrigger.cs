@@ -8,6 +8,7 @@ public class CollectionUITrigger : MonoBehaviour
     public Button myButton;
     public GameObject mainUI;
     public GameObject collectionUI;
+    public AudioSource switchSound;
 
     void Start()
     {
@@ -21,11 +22,13 @@ public class CollectionUITrigger : MonoBehaviour
         // 메인 ui 닫기& 콜렉션 ui 열기
         mainUI.SetActive(false);
         collectionUI.SetActive(true);
+        switchSound.Play();
     }
 
     public void CloseCollectionUI() // 닫기 버튼에 의해 실행
     {
         mainUI.SetActive(true);
         collectionUI.SetActive(false);       
+        switchSound.Play();
     }
 }
