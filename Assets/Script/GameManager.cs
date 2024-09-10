@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     float scaleSize = 1.15f;   // 최대 크기
     float duration = 0.6f;    // 애니메이션 지속 시간
 
-    int bestScoreValue;
+    public int bestScoreValue;
 
     public Text currentScore;
 
@@ -53,11 +53,12 @@ public class GameManager : MonoBehaviour
     {
 
         // PlayerPrefs.DeleteAll();
-        PlayerPrefs.SetInt("BestScore", 40);
-        PlayerPrefs.Save();
+        // PlayerPrefs.SetInt("BestScore", 0);
+        // PlayerPrefs.Save();
         
         int lastScoreValue = PlayerPrefs.GetInt("ScoreValue", 0);
         int isNewRecord = PlayerPrefs.GetInt("NewRecord", 0);
+        bestScoreValue = PlayerPrefs.GetInt("BestScore", 0);
 
         currentScore.text = lastScoreValue.ToString();
         
@@ -76,7 +77,6 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            bestScoreValue = PlayerPrefs.GetInt("BestScore", 0);
             bestScore.text = "Best score: " + bestScoreValue.ToString();
         }
     }

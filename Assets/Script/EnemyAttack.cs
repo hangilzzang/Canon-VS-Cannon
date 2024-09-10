@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
@@ -169,7 +170,11 @@ public class EnemyAttack : MonoBehaviour
 
     void LaunchCannonball()
     {
-        if (GameManager.instance.scoreValue < 10)
+        if (GameManager.instance.scoreValue == 0)
+        {
+            selectedTrajectory = trajectories[0];
+        }
+        else if (GameManager.instance.scoreValue < 10)
         {
             selectedTrajectory = trajectories[Random.Range(0, 11)];
         }

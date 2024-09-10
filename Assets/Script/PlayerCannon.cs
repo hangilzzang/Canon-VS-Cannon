@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
 
 
 public class PlayerCannon : MonoBehaviour
@@ -57,19 +58,61 @@ public class PlayerCannon : MonoBehaviour
     List<Sprite> ballSprites;
     Sprite selectedSprite;
 
+    // 튜토리얼
+    public Image image;
+    public GameObject fingerObj;
+    public Transform finger;
+    Sequence mySequence;
+    public GameObject fingerText;
 
 
 
     void Start()   // 이벤트 등록
     {   
         EventManager.instance.StateChangeEvent += GameReady_;
+        EventManager.instance.StateChangeEvent += tutorial_;
         EventManager.instance.MouseDownEvent += FireCannonBall_;
-
     }
     void OnDisable() // 이벤트 해제
     {
         EventManager.instance.StateChangeEvent -= GameReady_;
+        EventManager.instance.StateChangeEvent -= tutorial_;
         EventManager.instance.MouseDownEvent -= FireCannonBall_;
+    }
+
+    void tutorial_()
+    {
+        if (GameManager.instance.gameState == GameManager.GameState.Game && GameManager.instance.bestScoreValue == 0)
+        {
+            StartCoroutine(tutorial());
+        }
+    }
+    
+    IEnumerator tutorial()
+    {
+        // 상태 변경(대포 발사 안되게)
+        GameManager.instance.gameState = GameManager.GameState.Ready;
+        // n초기다림
+        yield return new WaitForSeconds(1.78f);
+        // 화면 어두워짐
+        // Color startColor = image.color;
+        // image.color = new Color(startColor.r, startColor.g, startColor.b, 0.15f);
+        // 터치 등장
+        fingerObj.SetActive(true);
+        // 터치애니메이션 재생
+        mySequence = DOTween.Sequence()
+            .Append(finger.DOScale(new Vector3(0.25f, 0.25f, 0.25f), 0.5f).SetUpdate(true))  // Unscaled time으로 스케일 조정
+            .Join(finger.DORotate(new Vector3(0, 0, 30), 0.5f).SetUpdate(true))          // Unscaled time으로 회전
+            .Join(finger.DOMove(new Vector2(-1f, 1f), 0.5f).SetRelative().SetUpdate(true)) // Unscaled time으로 이동
+            .SetLoops(-1, LoopType.Yoyo).SetUpdate(true); // 무한 루프
+
+        // 터치 텍스트
+        fingerText.SetActive(true);
+        // 게임상태 변경 이제 발사 가능
+        GameManager.instance.gameState = GameManager.GameState.Game;
+        // 시간멈춤
+        Time.timeScale = 0f;
+        Time.fixedDeltaTime = 0f;
     }
 
 
@@ -84,6 +127,24 @@ public class PlayerCannon : MonoBehaviour
     
     IEnumerator FireCannonBall()
     {
+        if (GameManager.instance.bestScoreValue == 0)
+        {
+            // 핑거 애니메이션 종료
+            mySequence.Kill();
+            fingerObj.SetActive(false);
+            //핑거 텍스트 종료
+            fingerText.SetActive(false);
+            // 시간이 다시 흐름
+            Time.timeScale = 1f;
+            Time.fixedDeltaTime = 0.01f;   
+            // 화면 어두워진거 해제
+            // Color startColor = image.color;
+            // image.color = new Color(startColor.r, startColor.g, startColor.b, 0f);
+
+
+        }
+
+
         GameManager.instance.gameState = GameManager.GameState.Reloading; // 상태변경
         
         
