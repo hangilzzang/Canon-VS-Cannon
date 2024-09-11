@@ -8,7 +8,7 @@ public class GameOver : MonoBehaviour
     float moveDuration = 1f; // 이동에 걸리는 시간
 
     public GameObject reviveUI;
-    bool canRevive = true;
+    public static bool canRevive = true;
     public AudioSource rockBreak;
     
     void Start()   // 이벤트 등록

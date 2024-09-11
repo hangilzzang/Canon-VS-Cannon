@@ -82,7 +82,7 @@ public class PlayerCannon : MonoBehaviour
 
     void tutorial_()
     {
-        if (GameManager.instance.gameState == GameManager.GameState.Game && GameManager.instance.bestScoreValue == 0)
+        if (GameManager.instance.gameState == GameManager.GameState.Game && GameManager.instance.bestScoreValue == 0 && GameOver.canRevive)
         {
             StartCoroutine(tutorial());
         }
