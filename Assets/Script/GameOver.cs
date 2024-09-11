@@ -31,10 +31,22 @@ public class GameOver : MonoBehaviour
         
         if (canRevive) // 부활 ui팝업
         {       
-            reviveUI.SetActive(true);
-            canRevive = false;
+            if (RewardAdRevive.instance == null) // 노광고 버전이다
+            {
+                reviveUI.SetActive(true);
+                canRevive = false;
+            }
+            else if (RewardAdRevive.instance != null && RewardAdRevive.instance._rewardedAd != null) // 광고버전이며 광고가 로드되었다
+            {
+                reviveUI.SetActive(true);
+                canRevive = false;
+            }
+            else // 광고 버전이지만 광고가 로드되지않았다
+            {
+                EventManager.instance.TriggerStateChanged();
+            }
         }
-        else // 게임종료
+        else // 두번째로 죽은경우
         {
             EventManager.instance.TriggerStateChanged();
         }

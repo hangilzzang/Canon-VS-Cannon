@@ -53,8 +53,8 @@ public class GameManager : MonoBehaviour
     {
 
         // PlayerPrefs.DeleteAll();
-        // PlayerPrefs.SetInt("BestScore", 0);
-        PlayerPrefs.Save();
+        // PlayerPrefs.SetInt("BestScore", 100);
+        // PlayerPrefs.Save();
         
         int lastScoreValue = PlayerPrefs.GetInt("ScoreValue", 0);
         int isNewRecord = PlayerPrefs.GetInt("NewRecord", 0);

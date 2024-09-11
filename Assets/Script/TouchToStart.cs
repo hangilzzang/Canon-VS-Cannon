@@ -10,6 +10,9 @@ public class TouchToStart : MonoBehaviour
     {
         EventManager.instance.MouseDownEvent += GameStart; // 이벤트 등록
         started = true;
+
+        // 광고 로드 시작
+        RewardAdRevive.instance?.LoadAd();
     }
 
     void OnEnable()

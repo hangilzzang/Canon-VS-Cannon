@@ -18,7 +18,7 @@ public class CollectionBallSellction : MonoBehaviour
     Button myButton; // 선택버튼
     Image myImage; // 선택효과
     public int ballNum;
-
+    public AudioSource stoneSound;
 
     
     
@@ -32,6 +32,7 @@ public class CollectionBallSellction : MonoBehaviour
     // 버튼이 클릭되었을 때 실행될 함수
     void OnButtonClick()
     {
+        stoneSound.Play();
         // 모든 셀렉효과를 끈다
         ball1.enabled = false;
         ball2.enabled = false;

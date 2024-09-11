@@ -10,6 +10,7 @@ public class EventManager : MonoBehaviour
     public event Action StateChangeEvent;
     public event Action GameOverEvent;
     public event Action DestoryAllCannonBallEvent;
+    public event Action watchedRewardAdEvent;
 
 
     void Awake()
@@ -39,5 +40,9 @@ public class EventManager : MonoBehaviour
     public void TriggerMouseDownEvent()
     {
         MouseDownEvent?.Invoke();
+    }
+    public void TriggerWatchedRewardAdEvent()
+    {
+        watchedRewardAdEvent?.Invoke();
     }
 }
