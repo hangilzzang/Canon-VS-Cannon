@@ -136,7 +136,7 @@ public class PlayerCannon : MonoBehaviour
             fingerText.SetActive(false);
             // 시간이 다시 흐름
             Time.timeScale = 1f;
-            Time.fixedDeltaTime = 0.01f;   
+            Time.fixedDeltaTime = GameManager.instance.fixedDeltaTimeValue;   
             // 화면 어두워진거 해제
             // Color startColor = image.color;
             // image.color = new Color(startColor.r, startColor.g, startColor.b, 0f);

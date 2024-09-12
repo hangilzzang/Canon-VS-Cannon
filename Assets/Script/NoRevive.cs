@@ -63,7 +63,7 @@ public class NoRevive : MonoBehaviour
     {
         // 시간 정상화
         Time.timeScale = 1f;
-        Time.fixedDeltaTime = 0.01f;
+        Time.fixedDeltaTime = GameManager.instance.fixedDeltaTimeValue;
         
         // reviveUI 끄기
         reviveUI.SetActive(false);
@@ -129,7 +129,7 @@ public class NoRevive : MonoBehaviour
     {
         // 시간 정상화
         Time.timeScale = 1f;
-        Time.fixedDeltaTime = 0.01f;
+        Time.fixedDeltaTime = GameManager.instance.fixedDeltaTimeValue;
         
         // reviveUI 끄기
         reviveUI.SetActive(false);

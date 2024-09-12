@@ -20,7 +20,7 @@ public class ReviveUI : MonoBehaviour
     {
         // 타임스케일 설정
         Time.timeScale = 0.2f;
-        Time.fixedDeltaTime = 0.01f * Time.timeScale;
+        Time.fixedDeltaTime = GameManager.instance.fixedDeltaTimeValue * Time.timeScale;
 
         Color imageColor = image.color;
         image.color = new Color(imageColor.r, imageColor.g, imageColor.b, 0.83f); 

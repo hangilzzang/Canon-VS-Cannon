@@ -14,6 +14,7 @@ public class GameOver : MonoBehaviour
     void Start()   // 이벤트 등록
     {   
         EventManager.instance.GameOverEvent += GameOver_;
+        canRevive = true;
     }
     void OnDisable() // 이벤트 해제
     {
@@ -24,7 +25,7 @@ public class GameOver : MonoBehaviour
         GameManager.instance.gameState = GameManager.GameState.NoRevive; // 상태변경
         rockBreak.Play();
 
-        Handheld.Vibrate();
+        // Handheld.Vibrate();
         
         // 카메라 이동
         StartCoroutine(MoveCameraToPosition(targetPosition, moveDuration));

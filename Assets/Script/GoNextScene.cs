@@ -17,7 +17,7 @@ public class GoNextScene : MonoBehaviour
     IEnumerator ChangeSceneAfterDelay()
     {
         // 3초 대기
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(4f);
         // 다음 씬으로 이동
         SceneManager.LoadScene("GameScene");
     }

@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
         NoRevive,
     }
 
+    public float fixedDeltaTimeValue = 0.01f;
     public GameState gameState;
     public Text scoreText;
     public int scoreValue = 0;
@@ -35,8 +36,8 @@ public class GameManager : MonoBehaviour
         gameState = GameState.Main;
         
         Time.timeScale = 1f;
-        Time.fixedDeltaTime = 0.01f;
-        Application.targetFrameRate = 60; // fps 60으로 설정
+        Time.fixedDeltaTime = fixedDeltaTimeValue;
+        Application.targetFrameRate = 120; // fps 60으로 설정
 
 
         if (instance == null)

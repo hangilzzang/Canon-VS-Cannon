@@ -16,6 +16,7 @@ public class TouchToStart : MonoBehaviour
         // 광고 로드 시작
         RewardAdRevive.instance?.LoadAd();
         IntersitialAd.instance?.LoadAd();
+
     }
 
     void OnEnable()
