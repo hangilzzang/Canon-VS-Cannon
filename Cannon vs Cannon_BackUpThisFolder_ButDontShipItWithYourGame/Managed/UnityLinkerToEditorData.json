@@ -2,6 +2,32 @@
   "report": {
     "modules": [
       {
+        "name": "AI",
+        "dependencies": [
+          {
+            "name": "NavMeshAgent",
+            "scenes": [],
+            "dependencyType": 0,
+            "icon": null
+          },
+          {
+            "name": "NavMeshProjectSettings",
+            "scenes": [],
+            "dependencyType": 1,
+            "icon": null
+          },
+          {
+            "name": "NavMeshSettings",
+            "scenes": [
+              "Assets/Scenes/GameScene.unity",
+              "Assets/Scenes/LogoScene.unity"
+            ],
+            "dependencyType": 1,
+            "icon": null
+          }
+        ]
+      },
+      {
         "name": "AndroidJNI",
         "dependencies": []
       },
@@ -477,6 +503,12 @@
             "icon": null
           },
           {
+            "name": "Required by AI Module",
+            "scenes": [],
+            "dependencyType": 2,
+            "icon": "package/com.unity.modules.ai"
+          },
+          {
             "name": "Required by AndroidJNI Module",
             "scenes": [],
             "dependencyType": 2,
@@ -519,6 +551,12 @@
             "icon": "package/com.unity.modules.jsonserialize"
           },
           {
+            "name": "Required by ParticleSystem Module",
+            "scenes": [],
+            "dependencyType": 2,
+            "icon": "package/com.unity.modules.particlesystem"
+          },
+          {
             "name": "Required by Physics Module",
             "scenes": [],
             "dependencyType": 2,
@@ -541,6 +579,12 @@
             "scenes": [],
             "dependencyType": 2,
             "icon": "package/com.unity.modules.screencapture"
+          },
+          {
+            "name": "Required by Subsystems Module",
+            "scenes": [],
+            "dependencyType": 2,
+            "icon": "package/com.unity.modules.subsystems"
           },
           {
             "name": "Required by TextCoreFontEngine Module",
@@ -623,6 +667,12 @@
             "icon": "package/com.unity.modules.runtimeinitializeonloadmanagerinitializer"
           },
           {
+            "name": "Required by Subsystems Module",
+            "scenes": [],
+            "dependencyType": 2,
+            "icon": "package/com.unity.modules.subsystems"
+          },
+          {
             "name": "Required by UIElements Module",
             "scenes": [],
             "dependencyType": 2,
@@ -631,12 +681,35 @@
         ]
       },
       {
+        "name": "ParticleSystem",
+        "dependencies": [
+          {
+            "name": "ParticleSystem",
+            "scenes": [],
+            "dependencyType": 0,
+            "icon": null
+          },
+          {
+            "name": "ParticleSystemRenderer",
+            "scenes": [],
+            "dependencyType": 0,
+            "icon": null
+          }
+        ]
+      },
+      {
         "name": "Physics",
         "dependencies": [
           {
-            "name": "Collider",
+            "name": "CharacterController",
             "scenes": [],
             "dependencyType": 0,
+            "icon": null
+          },
+          {
+            "name": "Collider",
+            "scenes": [],
+            "dependencyType": 1,
             "icon": null
           },
           {
@@ -676,6 +749,12 @@
             "name": "Collider2D",
             "scenes": [],
             "dependencyType": 1,
+            "icon": null
+          },
+          {
+            "name": "Joint2D",
+            "scenes": [],
+            "dependencyType": 0,
             "icon": null
           },
           {
@@ -729,6 +808,12 @@
         "name": "SharedInternals",
         "dependencies": [
           {
+            "name": "Required by AI Module",
+            "scenes": [],
+            "dependencyType": 2,
+            "icon": "package/com.unity.modules.ai"
+          },
+          {
             "name": "Required by AndroidJNI Module",
             "scenes": [],
             "dependencyType": 2,
@@ -777,6 +862,12 @@
             "icon": "package/com.unity.modules.jsonserialize"
           },
           {
+            "name": "Required by ParticleSystem Module",
+            "scenes": [],
+            "dependencyType": 2,
+            "icon": "package/com.unity.modules.particlesystem"
+          },
+          {
             "name": "Required by Physics Module",
             "scenes": [],
             "dependencyType": 2,
@@ -799,6 +890,12 @@
             "scenes": [],
             "dependencyType": 2,
             "icon": "package/com.unity.modules.screencapture"
+          },
+          {
+            "name": "Required by Subsystems Module",
+            "scenes": [],
+            "dependencyType": 2,
+            "icon": "package/com.unity.modules.subsystems"
           },
           {
             "name": "Required by TextCoreFontEngine Module",
@@ -831,6 +928,10 @@
             "icon": "package/com.unity.modules.uielements"
           }
         ]
+      },
+      {
+        "name": "Subsystems",
+        "dependencies": []
       },
       {
         "name": "TextCoreFontEngine",
