@@ -6,7 +6,7 @@ using UnityEngine;
 public class EventManager : MonoBehaviour
 {
     public static EventManager instance;
-    public event Action MouseDownEvent;
+    public event Action<Vector2> MouseDownEvent;
     public event Action StateChangeEvent;
     public event Action GameOverEvent;
     public event Action DestoryAllCannonBallEvent;
@@ -37,9 +37,9 @@ public class EventManager : MonoBehaviour
     {
         DestoryAllCannonBallEvent?.Invoke();
     }
-    public void TriggerMouseDownEvent()
+    public void TriggerMouseDownEvent(Vector2 mousePosition)
     {
-        MouseDownEvent?.Invoke();
+        MouseDownEvent?.Invoke(mousePosition);
     }
     public void TriggerWatchedRewardAdEvent()
     {

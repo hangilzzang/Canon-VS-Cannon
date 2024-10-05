@@ -34,7 +34,7 @@ public class TouchToStart : MonoBehaviour
         EventManager.instance.MouseDownEvent -= GameStart;
     }
 
-    void GameStart()
+    void GameStart(Vector2 mousePosition)
     {
         if (GameManager.instance.gameState == GameManager.GameState.Main)
         {

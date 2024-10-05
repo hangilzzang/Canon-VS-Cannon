@@ -7,6 +7,7 @@ public class MouseDownScript : MonoBehaviour, IPointerDownHandler
 {
     public void OnPointerDown(PointerEventData eventData)
     {
-        EventManager.instance.TriggerMouseDownEvent();
+        Vector2 mousePosition = eventData.position;
+        EventManager.instance.TriggerMouseDownEvent(mousePosition);
     }
 }

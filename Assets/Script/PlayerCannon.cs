@@ -116,7 +116,7 @@ public class PlayerCannon : MonoBehaviour
     }
 
 
-    void FireCannonBall_()
+    void FireCannonBall_(Vector2 mousePosition)
     {
         if (GameManager.instance.gameState == GameManager.GameState.Game)
         {
