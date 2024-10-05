@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-
+using GooglePlayGames.BasicApi;
+using GooglePlayGames;
 
 public class GameManager : MonoBehaviour
 {
@@ -56,6 +57,8 @@ public class GameManager : MonoBehaviour
         // PlayerPrefs.DeleteAll();
         // PlayerPrefs.SetInt("BestScore", 100);
         // PlayerPrefs.Save();
+        PlayGamesPlatform.Activate();
+        PlayGamesPlatform.DebugLogEnabled = true;
         
         int lastScoreValue = PlayerPrefs.GetInt("ScoreValue", 0);
         int isNewRecord = PlayerPrefs.GetInt("NewRecord", 0);
@@ -101,6 +104,25 @@ public class GameManager : MonoBehaviour
     {
         if (scoreValue > bestScoreValue)
         {
+            // 리더보드 업데이트 로직
+            Social.localUser.Authenticate(
+            (bool success) =>
+            {
+                if (success) 
+                {
+                    Social.ReportScore(scoreValue, "CgkI_4O68cYOEAIQAg", (bool status) => 
+                    {
+                        if (status)
+                        {
+                            Debug.Log("Update Score Success");
+                        }
+                        else
+                        {
+                            Debug.Log("Update Score Didnt Success");
+                        }
+                    });
+                }
+            });
             PlayerPrefs.SetInt("BestScore", scoreValue);
             PlayerPrefs.SetInt("NewRecord", 1);
             PlayerPrefs.Save();
