@@ -19,10 +19,17 @@ public class CollectionUITrigger : MonoBehaviour
     // 버튼이 클릭되었을 때 실행될 함수
     void OnButtonClick()
     {
-        // 메인 ui 닫기& 콜렉션 ui 열기
-        mainUI.SetActive(false);
-        collectionUI.SetActive(true);
-        switchSound.Play();
+        if (mainUI.activeSelf)
+        {
+            // 메인 ui 닫기& 콜렉션 ui 열기
+            mainUI.SetActive(false);
+            collectionUI.SetActive(true);
+            switchSound.Play();
+        }
+        else
+        {
+            CloseCollectionUI();
+        }
     }
 
     public void CloseCollectionUI() // 닫기 버튼에 의해 실행
